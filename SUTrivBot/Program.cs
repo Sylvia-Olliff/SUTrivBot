@@ -7,7 +7,7 @@ namespace SUTrivBot
     {
         static async Task Main(string[] args)
         {
-            IBot discBot = new Bot(Environment.GetEnvironmentVariable("BOT_TOKEN"));
+            IBot discBot = new Bot();
 
             await discBot.StartAsync();
         }

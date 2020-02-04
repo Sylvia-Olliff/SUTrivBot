@@ -1,5 +1,6 @@
 ﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using SUTrivBot.Lib;
 using SUTrivBot.Models;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,23 @@ namespace SUTrivBot
 {
     public class Bot : IBot
     {
-        private DiscordClient discord;
-        private CommandsNextModule commands;
+        private readonly DiscordClient _discord;
+        private readonly CommandsNextModule _commands;
 
-        // TODO: Replace with ConfigBuilder and Config reference to retrieve these config values.
-        public Bot(string botToken)
+        public Bot()
         {
-            discord = new DiscordClient(new DiscordConfiguration
-            {
-                Token = botToken,
-                TokenType = TokenType.Bot
-            });
+            var config = ConfigBuilder.Build();
 
-            commands = discord.UseCommandsNext(new CommandsNextConfiguration
-            {
-                StringPrefix = ";;"
-            });
+            _discord = new DiscordClient(config.DiscordConfiguration);
 
-            commands.RegisterCommands<Commands>();
+            _commands = _discord.UseCommandsNext(config.CommandsNextConfiguration);
+
+            _commands.RegisterCommands<Commands>();
         }
 
         public async Task StartAsync()
         {
-            await discord.ConnectAsync();
+            await _discord.ConnectAsync();
             await Task.Delay(-1);
         }
     }
