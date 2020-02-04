@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace SUTrivBot
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IBot discBot = new Bot(Environment.GetEnvironmentVariable("BOT_TOKEN"));
+
+            await discBot.StartAsync();
         }
     }
 }
