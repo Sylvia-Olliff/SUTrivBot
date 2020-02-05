@@ -1,29 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace SUTrivBot.Models
 {
     public class Question : IQuestion
     {
-        // TODO: Should contain all necessary pieces to ask and then verify the answers to a trivia question
+        [JsonProperty("questionText", Required = Required.Always)]
+        public string QuestionText { get; set; }
 
-        private string _questionText;
-        private string _answerText;
+        [JsonProperty("answers", Required = Required.Always)]
+        public List<string> Answers { get; set; }
 
-        public Question(string qText, string aText)
-        {
-            _questionText = qText;
-            _answerText = aText;
-        }
+        [JsonProperty("answerAll", Required = Required.Always)]
+        public bool AnswerAll { get; set; }
+
+        [JsonProperty("bonusAnswers", NullValueHandling = NullValueHandling.Ignore)]
+        public List<string> BonusAnswers { get; set; }
+
+        [JsonProperty("bonusAll", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? BonusAll { get; set; }
+
+        [JsonProperty("points", Required = Required.Always)]
+        public int Points { get; set; }
+
+        [JsonProperty("bonusPoints", NullValueHandling = NullValueHandling.Ignore)]
+        public int BonusPoints { get; set; }
+
 
         public string GetQuestionText()
         {
-            throw new NotImplementedException();
+            return QuestionText;
         }
 
-        public bool VerifyAnswer(string answer)
+        public AnswerResponse VerifyAnswer(string answer)
         {
+            if (BonusPoints != 0)
+            {
+
+            }
+            else
+            {
+
+            }
             throw new NotImplementedException();
         }
     }

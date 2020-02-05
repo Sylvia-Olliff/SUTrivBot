@@ -7,6 +7,6 @@ namespace SUTrivBot.Models
     public interface IQuestion
     {
         public string GetQuestionText();
-        public bool VerifyAnswer(string answer);
+        public AnswerResponse VerifyAnswer(string answer);
     }
 }
