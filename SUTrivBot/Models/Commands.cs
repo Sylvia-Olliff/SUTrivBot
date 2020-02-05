@@ -1,12 +1,9 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
-using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
-using DSharpPlus.Entities;
 
 namespace SUTrivBot.Models
 {
@@ -14,11 +11,13 @@ namespace SUTrivBot.Models
     {
         // TODO: Add appropriate commands. Current list: AskQuestion, GetPointsList, GetTotalQuestionCount, Echo
 
-        private Dictionary<string, GameState> _games;
+        private ConcurrentDictionary<string, GameState> _games;
+        private static Random _random;  
 
         public Commands()
         {
-            _games = new Dictionary<string, GameState>();
+            _games = new ConcurrentDictionary<string, GameState>();
+            _random = new Random();
         }
         
         [Command("echo")]
@@ -73,8 +72,8 @@ namespace SUTrivBot.Models
             try
             {
                 var gameState = new GameState(ctx);
-                var key = getChannelKeyFromCommandContext(ctx);
-                _games.Add(key, gameState);
+                var key = GetChannelKeyFromCommandContext(ctx);
+                _games.AddOrUpdate(key, gameState, (s, state) => gameState);
                 await ctx.RespondAsync("New game created");
             }
             catch
@@ -92,8 +91,8 @@ namespace SUTrivBot.Models
         {
             try
             {
-                var key = getChannelKeyFromCommandContext(ctx);
-                _games.Remove(key);
+                var key = GetChannelKeyFromCommandContext(ctx);
+                _games.TryRemove(key, out _);
                 await ctx.RespondAsync("Game over");
             }
             catch
@@ -103,13 +102,42 @@ namespace SUTrivBot.Models
         }
 
         /**
+         * [Not Role Restricted]
+         * Get some catpics
+         */
+        [Command("catpics")]
+        public async Task CatPics(CommandContext ctx, [Description("How many cat pics?")] int count)
+        {
+            try
+            {
+                for (var i = 0; i < count; i++)
+                {
+                    var width = GetRandomNumber(500, 600);
+                    var height = GetRandomNumber(500, 600);
+                    await ctx.RespondAsync($"https://placekitten.com/{width}/{height}");
+                }
+            }
+            catch
+            {
+                await ctx.RespondAsync("Failed to generate cat pics");
+            }
+        }
+
+        /**
          * Calculate the channel key based on the command context
          * This key is used to uniquely identify each game in the games dictionary
          */
-        public static string getChannelKeyFromCommandContext(CommandContext ctx)
+        public static string GetChannelKeyFromCommandContext(CommandContext ctx)
         {
             return $"{ctx.Guild.Id}/{ctx.Channel.Id}";
         }
         
+        /**
+         * Generate a random int between 2 ints
+         */
+        public static int GetRandomNumber(int min, int max)  
+        {  
+            return _random.Next(min, max);  
+        }  
     }
 }
