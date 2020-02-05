@@ -3,6 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Project files
+.idea
+
+# Bot token
+SUTrivBot/token.txt
+
 # User-specific files
 *.rsuser
 *.suo
