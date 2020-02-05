@@ -5,9 +5,9 @@ namespace SUTrivBot.Models
     public interface IGameState
     {
      
-        public string getGameName();
-        public void play(CommandContext ctx);
-        public void next(CommandContext ctx);
-        public void stop(CommandContext ctx);
+        public string GetGameName();
+        public void Play(CommandContext ctx);
+        public void Next(CommandContext ctx);
+        public void Stop(CommandContext ctx);
     }
 }

@@ -5,35 +5,33 @@ namespace SUTrivBot.Models
 {
     public class GameState : IGameState
     {
-        private CommandContext initContext; // The command context used to initialize this game
-        private DiscordChannel channel;
-        private DiscordGuild guild;
-        private DiscordUser triviaMaster; 
+        private DiscordChannel _channel;
+        private DiscordGuild _guild;
+        private DiscordUser _triviaMaster; 
 
         public GameState(CommandContext ctx)
         {
-            initContext = ctx;
-            channel = ctx.Channel;
-            guild = ctx.Guild;
-            triviaMaster = ctx.User;
+            _channel = ctx.Channel;
+            _guild = ctx.Guild;
+            _triviaMaster = ctx.User;
         }
 
-        public string getGameName()
+        public string GetGameName()
         {
-            return $"Game in Channel {channel.Name} in Guild {guild.Name}";
+            return $"Game in Channel {_channel.Name} in Guild {_guild.Name}";
         }
         
-        public void play(CommandContext ctx)
-        {
-            
-        }
-        
-        public void stop(CommandContext ctx)
+        public void Play(CommandContext ctx)
         {
             
         }
         
-        public void next(CommandContext ctx)
+        public void Stop(CommandContext ctx)
+        {
+            
+        }
+        
+        public void Next(CommandContext ctx)
         {
             
         }

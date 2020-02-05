@@ -14,11 +14,11 @@ namespace SUTrivBot.Models
     {
         // TODO: Add appropriate commands. Current list: AskQuestion, GetPointsList, GetTotalQuestionCount, Echo
 
-        private Dictionary<string, GameState> games;
+        private Dictionary<string, GameState> _games;
 
         public Commands()
         {
-            games = new Dictionary<string, GameState>();
+            _games = new Dictionary<string, GameState>();
         }
         
         [Command("echo")]
@@ -34,8 +34,8 @@ namespace SUTrivBot.Models
         [Command("ids")]
         public async Task Ids(CommandContext ctx)
         {
-            
-            var result = $"Guild ID (ctx.Guild.Id) {ctx.Guild.Id}{Environment.NewLine}";
+            var result = "IDs " + Environment.NewLine;
+            result += $"Guild ID (ctx.Guild.Id) {ctx.Guild.Id}{Environment.NewLine}";
             result += $"Channel ID (ctx.Channel.Id) {ctx.Channel.Id}{Environment.NewLine}";
             await ctx.RespondAsync(result);
         }
@@ -48,9 +48,9 @@ namespace SUTrivBot.Models
         public async Task List(CommandContext ctx)
         {
             var response = "";
-            if (games.Count > 0)
+            if (_games.Count > 0)
             {
-                response = games.Aggregate("", (acc, x) =>  $"{acc + x.Value.getGameName() + Environment.NewLine}");
+                response = _games.Aggregate("", (acc, x) =>  $"{acc + x.Value.GetGameName() + Environment.NewLine}");
             }
             else
             {
@@ -74,7 +74,7 @@ namespace SUTrivBot.Models
             {
                 var gameState = new GameState(ctx);
                 var key = getChannelKeyFromCommandContext(ctx);
-                games.Add(key, gameState);
+                _games.Add(key, gameState);
                 await ctx.RespondAsync("New game created");
             }
             catch
@@ -93,7 +93,7 @@ namespace SUTrivBot.Models
             try
             {
                 var key = getChannelKeyFromCommandContext(ctx);
-                games.Remove(key);
+                _games.Remove(key);
                 await ctx.RespondAsync("Game over");
             }
             catch
