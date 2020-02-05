@@ -1,0 +1,40 @@
+﻿{
+  "questions": [
+    {
+      "questionText": "Why do snakes make Steven cry?",
+      "answers": ["They don't have any arms", "They do not have any arms"],
+      "answerAll": false,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "List the full names (if known) of all three Cool Kids",
+      "answers": ["Buck Dewey", "Jenny Pizza", "Sour Cream"],
+      "answerAll": true,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 2,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is Peridot's Homeworld classification? (Facet or Cut - bonus name both)",
+      "answers": ["Facet-2F5L", "Cut-5XG"],
+      "answerAll": false,
+      "bonusAnswers": ["Facet-2F5L", "Cut-5XG"],
+      "bonusAll": true,
+      "points": 1,
+      "bonusPoints": 2
+    },
+    {
+      "questionText": "Give the name of one of the Zoomans (not including Greg and Steven). Bonus for all of them",
+      "answers": ["Y-6", "J-10", "U-12", "F-3"],
+      "answerAll": false,
+      "bonusAnswers": ["Y-6", "J-10", "U-12", "F-3"],
+      "bonusAll": true,
+      "points": 1,
+      "bonusPoints": 3
+    }
+  ]
+}
