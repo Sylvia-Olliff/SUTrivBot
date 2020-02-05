@@ -13,9 +13,12 @@
           <e p="ConfigBuilder.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
+          <e p="AnswerResponse.cs" t="Include" />
+          <e p="AnswerStatus.cs" t="Include" />
           <e p="Commands.cs" t="Include" />
           <e p="Config.cs" t="Include" />
-          <e p="IQuestion.cs" t="Include" />
+          <e p="GameState.cs" t="Include" />
+          <e p="IGameState.cs" t="Include" />
           <e p="Question.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -29,6 +32,7 @@
         <e p="Repo" t="Include">
           <e p="ITriviaStore.cs" t="Include" />
           <e p="triviaData.csv" t="Include" />
+          <e p="TriviaDataSet.cs" t="Include" />
           <e p="triviaQAData.json" t="Include" />
           <e p="TriviaStore.cs" t="Include" />
         </e>
