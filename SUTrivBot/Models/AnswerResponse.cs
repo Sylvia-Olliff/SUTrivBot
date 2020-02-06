@@ -9,5 +9,6 @@ namespace SUTrivBot.Models
         public AnswerStatus AnswerStatus { get; set; }
         public int Points { get; set; }
         public int? BonusPoints { get; set; }
+        public Exception Exception { get; set; }
     }
 }

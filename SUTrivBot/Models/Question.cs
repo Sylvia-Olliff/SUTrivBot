@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using NLog;
+using SUTrivBot.Lib;
 
 namespace SUTrivBot.Models
 {
@@ -53,6 +55,12 @@ namespace SUTrivBot.Models
         
         public int Id { get; set; }
 
+        /// <summary>
+        /// Verifies that the provided answer string is correct and if so, if it qualifies for the bonus answer
+        /// if there is one.
+        /// </summary>
+        /// <param name="answer">Answer string from user</param>
+        /// <returns></returns>
         public AnswerResponse VerifyAnswer(string answer)
         {
             var response = new AnswerResponse
@@ -98,10 +106,10 @@ namespace SUTrivBot.Models
 
 
             }
-            catch (Exception e)
+            catch (Exception e) // Handling any errors is the responsibility of the consumer
             {
-                // TODO: Add logging and other error handling
                 response.AnswerStatus = AnswerStatus.Error;
+                response.Exception = e;
             }
 
             return response;
