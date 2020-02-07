@@ -33,12 +33,23 @@ namespace SUTrivBot.Repo
             if (!_isLoaded)
                 throw new ConstraintException("Trivia Store MUST be loaded before requesting a Question");
 
+            if (excludedQuestions is null)
+                return _questions[_rnjesus.Next(1, _questions.Count)];
+            
             int key;
             
             do key = _rnjesus.Next(1, _questions.Count);
             while (excludedQuestions.Contains(key));
             
             return _questions[key];
+        }
+
+        public Question GetQuestionById(int id)
+        {
+            if (!_isLoaded)
+                throw new ConstraintException("Trivia Store MUST be loaded before requesting a Question");
+
+            return _questions[id];
         }
 
         public async Task LoadQuestions()

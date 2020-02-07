@@ -2,8 +2,8 @@
   "questions": [
     {
       "questionText": "Why do snakes make Steven cry?",
-      "answers": ["They don't have any arms", "They do not have any arms"],
-      "answerAll": false,
+      "answers": ["no", "arms"],
+      "answerAll": true,
       "bonusAnswers": [""],
       "bonusAll": false,
       "points": 1,

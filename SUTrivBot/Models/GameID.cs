@@ -11,11 +11,13 @@ namespace SUTrivBot.Models
     {
         public DiscordChannel Channel { get; }
         public DiscordGuild Guild { get; }
+        public DiscordUser User { get; }
         
-        public GameId(DiscordGuild guild, DiscordChannel channel)
+        public GameId(DiscordGuild guild, DiscordChannel channel, DiscordUser user)
         {
             Channel = channel;
             Guild = guild;
+            User = user;
         }
         
         /// <summary>

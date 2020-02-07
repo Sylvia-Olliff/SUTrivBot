@@ -114,5 +114,19 @@ namespace SUTrivBot.Models
 
             return response;
         }
+
+        // Overriding Equals for easier checking if a List of questions contains a given question or not
+        public override bool Equals(object obj)
+        {
+            if (obj is null)
+                return false;
+
+            if (!(obj is Question))
+                return false;
+
+            var otherQ = (Question) obj;
+
+            return otherQ.Id == Id;
+        }
     }
 }
