@@ -4,6 +4,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
+using DSharpPlus.Entities;
+using NLog;
+using SUTrivBot.Lib;
 
 namespace SUTrivBot.Models
 {
@@ -11,18 +14,23 @@ namespace SUTrivBot.Models
     {
         // TODO: Add appropriate commands. Current list: AskQuestion, GetPointsList, GetTotalQuestionCount, Echo
 
-        private ConcurrentDictionary<string, GameState> _games;
-        private static Random _random;  
+        private ConcurrentDictionary<GameId, IGameState> _games;
+        private static Random _random;
+        private readonly ILogger _logger;
 
         public Commands()
         {
-            _games = new ConcurrentDictionary<string, GameState>();
+            _games = new ConcurrentDictionary<GameId, IGameState>();
             _random = new Random();
+            _logger = ConfigBuilder.Build().Logger;
         }
         
         [Command("echo")]
         public async Task Echo(CommandContext ctx)
         {
+            // Example Debug of a command using the logger
+            _logger.Debug($"Echo Command received from {ctx.Guild.Name} in channel {ctx.Channel.Name} by user {ctx.User.Username}");
+            
             await ctx.RespondAsync(ctx.RawArgumentString);
         }
         
@@ -71,13 +79,13 @@ namespace SUTrivBot.Models
         {
             try
             {
-                var gameState = new GameState(ctx);
-                var key = GetChannelKeyFromCommandContext(ctx);
-                _games.AddOrUpdate(key, gameState, (s, state) => gameState);
+                var gameState = new GameState(ctx, _logger);
+                _games.AddOrUpdate(new GameId(ctx.Guild, ctx.Channel), gameState, (s, state) => gameState);
                 await ctx.RespondAsync("New game created");
             }
-            catch
+            catch (Exception e)
             {
+                _logger.Error(e, "Error creating new game!");
                 await ctx.RespondAsync("Failed to create new game");
             }
         }
@@ -91,7 +99,7 @@ namespace SUTrivBot.Models
         {
             try
             {
-                var key = GetChannelKeyFromCommandContext(ctx);
+                var key = new GameId(ctx.Guild, ctx.Channel);
                 _games.TryRemove(key, out _);
                 await ctx.RespondAsync("Game over");
             }
@@ -124,18 +132,9 @@ namespace SUTrivBot.Models
         }
 
         /**
-         * Calculate the channel key based on the command context
-         * This key is used to uniquely identify each game in the games dictionary
-         */
-        public static string GetChannelKeyFromCommandContext(CommandContext ctx)
-        {
-            return $"{ctx.Guild.Id}/{ctx.Channel.Id}";
-        }
-        
-        /**
          * Generate a random int between 2 ints
          */
-        public static int GetRandomNumber(int min, int max)  
+        private static int GetRandomNumber(int min, int max)  
         {  
             return _random.Next(min, max);  
         }  

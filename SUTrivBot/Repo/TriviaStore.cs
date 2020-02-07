@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NLog;
 
 namespace SUTrivBot.Repo
 {
@@ -14,13 +15,17 @@ namespace SUTrivBot.Repo
     {
         private Random _rnjesus;
         private ConcurrentDictionary<int, Question> _questions;
+        private ILogger _logger;
         private bool _isLoaded;
+        private TriviaStoreSettings _settings;
 
-        public TriviaStore()
+        public TriviaStore(ILogger logger, TriviaStoreSettings settings)
         {
             _rnjesus = new Random();
             _isLoaded = false;
             _questions = new ConcurrentDictionary<int, Question>();
+            _logger = logger;
+            _settings = settings;
         }
         
         public Question GetRandomQuestion(List<int> excludedQuestions)
@@ -40,8 +45,7 @@ namespace SUTrivBot.Repo
         {
             try
             {
-                // TODO: Replace string literal with config value for location and name of file
-                using (var file = new StreamReader("./triviaQAData.json"))
+                using (var file = new StreamReader(_settings.PathToFile))
                 {
                     var dataSet = JsonConvert.DeserializeObject<TriviaDataSet>(await file.ReadToEndAsync());
                     
@@ -53,12 +57,13 @@ namespace SUTrivBot.Repo
                         count++;
                     }
                 }
-
+                
+                _logger.Debug($"{_questions.Count} Trivia Questions successfully loaded. ");
                 _isLoaded = true;
             }
             catch (Exception e)
             {
-                // TODO: Add logging and error handling
+                _logger.Error(e, "Error Loading Trivia Questions Data!");
                 throw;
             }
         }

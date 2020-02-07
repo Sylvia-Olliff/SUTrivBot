@@ -5,15 +5,12 @@ using NLog.Config;
 using NLog.Targets;
 using SUTrivBot.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace SUTrivBot.Lib
 {
     public static class ConfigBuilder
     {
-        // TODO: Load configuration values from appsettings.json
-
         private static Config _currentConfig = null;
 
         public static Config Build()
@@ -21,17 +18,39 @@ namespace SUTrivBot.Lib
             if (_currentConfig != null)
                 return _currentConfig;
 
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+
+            var triviaSection = config.GetSection("TriviaStoreSettings");
+            var commandsSection = config.GetSection("CommandsSettings");
+            var botSection = config.GetSection("BotSettings");
+            botSection["Token"] = config["BOT_TOKEN"];
+
             _currentConfig = new Config(GetLogger(), 
                 new DiscordConfiguration
                 {
-                    Token = Environment.GetEnvironmentVariable("BOT_TOKEN"), // This is stored as an EnvVar for security
-                    TokenType = TokenType.Bot
-                },
+                    Token = botSection["Token"],
+                    TokenType = TokenType.Bot,
+                    UseInternalLogHandler = bool.Parse(botSection["UseInternalLogHandler"]),
+                    LogLevel = Enum.Parse<DSharpPlus.LogLevel>(botSection["LogLevel"]),
+                    AutoReconnect = bool.Parse(botSection["AutoReconnect"])
+                }, 
                 new CommandsNextConfiguration
                 {
-                    StringPrefix = ";;" // TODO: Replace this string literal with a reference to appsettings.json
+                    StringPrefix = commandsSection["StringPrefix"],
+                    CaseSensitive = bool.Parse(commandsSection["CaseSensitive"]),
+                    EnableDefaultHelp = bool.Parse(commandsSection["EnableDefaultHelp"]),
+                    EnableDms = bool.Parse(commandsSection["EnableDms"]),
+                    EnableMentionPrefix = bool.Parse(commandsSection["EnableMentionPrefix"]),
+                    IgnoreExtraArguments = bool.Parse(commandsSection["IgnoreExtraArguments"])
+                }, 
+                new TriviaStoreSettings
+                {
+                    PathToFile = triviaSection["PathToFile"]
                 });
-
+            
             return _currentConfig;
         }
 
