@@ -1,4 +1,13 @@
 ﻿{
+  "questionTemplate": {
+    "questionText": "",
+    "answers": [],
+    "answerAll": false,
+    "bonusAnswers": [],
+    "bonusAll": false,
+    "points": 0,
+    "bonusPoints": 0
+  },
   "questions": [
     {
       "questionText": "Why do snakes make Steven cry?",
@@ -32,6 +41,24 @@
       "answers": ["Y-6", "J-10", "U-12", "F-3"],
       "answerAll": false,
       "bonusAnswers": ["Y-6", "J-10", "U-12", "F-3"],
+      "bonusAll": true,
+      "points": 2,
+      "bonusPoints": 5
+    },
+    {
+      "questionText": "What does Buck try to order at The Big Donut in Shirt Club?",
+      "answers": ["Caprese", "salad"],
+      "answerAll": true,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 2,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is Steven's canonical birth month? Bonus: name the day too",
+      "answers": ["August"],
+      "answerAll": false,
+      "bonusAnswers": ["August", "15"],
       "bonusAll": true,
       "points": 1,
       "bonusPoints": 3
