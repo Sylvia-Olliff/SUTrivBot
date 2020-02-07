@@ -24,7 +24,7 @@ namespace SUTrivBot.Models
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Guild.Id}/{Channel.Id}";
+            return $"{Guild.Name}/{Channel.Name}";
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace SUTrivBot.Models
 
             var otherId = (GameId) obj;
 
-            return otherId.ToString() == this.ToString();
+            return otherId.Channel.Id == Channel.Id && otherId.Guild.Id == Guild.Id;
         }
     }
 }
