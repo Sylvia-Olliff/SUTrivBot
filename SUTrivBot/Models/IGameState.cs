@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 
 namespace SUTrivBot.Models
@@ -6,8 +7,7 @@ namespace SUTrivBot.Models
     {
      
         public string GetGameName();
-        public void Play(CommandContext ctx);
-        public void Next(CommandContext ctx);
-        public void Stop(CommandContext ctx);
+        public Task AskQuestion(CommandContext ctx);
+        public Task GetResults(CommandContext ctx);
     }
 }

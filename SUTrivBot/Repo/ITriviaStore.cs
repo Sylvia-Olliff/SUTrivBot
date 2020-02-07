@@ -9,6 +9,7 @@ namespace SUTrivBot.Repo
     public interface ITriviaStore
     {
         public Task LoadQuestions();
-        public Question GetRandomQuestion(List<int> ExcludedQuestions);
+        public Question GetRandomQuestion(List<int> excludedQuestions);
+        public Question GetQuestionById(int id);
     }
 }

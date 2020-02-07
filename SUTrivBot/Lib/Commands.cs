@@ -1,26 +1,22 @@
-﻿using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-using System;
-using System.Collections.Concurrent;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DSharpPlus.Entities;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
 using NLog;
-using SUTrivBot.Lib;
+using SUTrivBot.Models;
 
-namespace SUTrivBot.Models
+namespace SUTrivBot.Lib
 {
     public class Commands
     {
         // TODO: Add appropriate commands. Current list: AskQuestion, GetPointsList, GetTotalQuestionCount, Echo
 
-        private ConcurrentDictionary<GameId, IGameState> _games;
         private static Random _random;
         private readonly ILogger _logger;
 
         public Commands()
         {
-            _games = new ConcurrentDictionary<GameId, IGameState>();
             _random = new Random();
             _logger = ConfigBuilder.Build().Logger;
         }
@@ -55,14 +51,8 @@ namespace SUTrivBot.Models
         public async Task List(CommandContext ctx)
         {
             var response = "";
-            if (_games.Count > 0)
-            {
-                response = _games.Aggregate("", (acc, x) =>  $"{acc + x.Value.GetGameName() + Environment.NewLine}");
-            }
-            else
-            {
-                response = "No games running";
-            }
+            var gamesList = GameMaster.GetAllGames();
+            response = gamesList.Count > 0 ? gamesList.Aggregate("", (acc, x) =>  $"{acc + x.GetGameName() + Environment.NewLine}") : "No games running";
             
             await ctx.RespondAsync(response);
         }
@@ -76,17 +66,29 @@ namespace SUTrivBot.Models
          */
         [Command("play")]
         public async Task Play(CommandContext ctx)
+        {            
+                if (GameMaster.NewGame(new GameId(ctx.Guild, ctx.Channel, ctx.User)))
+                    await ctx.RespondAsync("New game created");
+                else
+                    await ctx.RespondAsync("Failed to create new game");
+        }
+
+        /**
+         * [TriviaMaster or admin]
+         * Start a new round of trivia for a currently running game
+         * Needs to check if a round is already running for this game.
+         */
+        [Command("start")]
+        public async Task Start(CommandContext ctx)
         {
-            try
+            var game = GameMaster.GetGameById(new GameId(ctx.Guild, ctx.Channel, null));
+            if (!(game is null))
             {
-                var gameState = new GameState(ctx, _logger);
-                _games.AddOrUpdate(new GameId(ctx.Guild, ctx.Channel), gameState, (s, state) => gameState);
-                await ctx.RespondAsync("New game created");
+                await game.AskQuestion(ctx);
             }
-            catch (Exception e)
+            else
             {
-                _logger.Error(e, "Error creating new game!");
-                await ctx.RespondAsync("Failed to create new game");
+                await ctx.RespondAsync("No Game currently running in this channel...");
             }
         }
         
@@ -99,8 +101,7 @@ namespace SUTrivBot.Models
         {
             try
             {
-                var key = new GameId(ctx.Guild, ctx.Channel);
-                _games.TryRemove(key, out _);
+                await GameMaster.ResolveGame(ctx, new GameId(ctx.Guild, ctx.Channel, ctx.User));
                 await ctx.RespondAsync("Game over");
             }
             catch
