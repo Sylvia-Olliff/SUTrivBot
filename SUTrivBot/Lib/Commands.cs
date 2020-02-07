@@ -1,14 +1,12 @@
-﻿using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-using System;
-using System.Collections.Concurrent;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DSharpPlus.Entities;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
 using NLog;
-using SUTrivBot.Lib;
+using SUTrivBot.Models;
 
-namespace SUTrivBot.Models
+namespace SUTrivBot.Lib
 {
     public class Commands
     {
