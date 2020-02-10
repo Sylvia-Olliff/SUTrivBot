@@ -16,6 +16,14 @@ namespace SUTrivBot.Models
         /// </summary>
         [JsonProperty("questionText", Required = Required.Always)]
         public string QuestionText { get; set; }
+        
+        /// <summary>
+        /// Text to be presented to the user as an answer for this Question.
+        /// This field contains human readable text
+        /// "Blue" for example
+        /// </summary>
+        [JsonProperty("answerText", Required = Required.Always)]
+        public string AnswerText { get; set; }
 
         /// <summary>
         /// Set of strings representing all acceptable answers
@@ -24,10 +32,11 @@ namespace SUTrivBot.Models
         public List<string> Answers { get; set; }
 
         /// <summary>
-        /// If true, then all strings in Answers must be present in the user's response
+        /// If null, then all strings in Answers must be present in the user's response
+        /// Otherwise, stores the count of required answers t 
         /// </summary>
-        [JsonProperty("answerAll", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? AnswerAll { get; set; }
+        [JsonProperty("answersRequired", NullValueHandling = NullValueHandling.Ignore)]
+        public int? AnswersRequired { get; set; }
 
         /// <summary>
         /// Set of strings representing all acceptable answers if the Question has a bonus portion
@@ -91,7 +100,7 @@ namespace SUTrivBot.Models
                     return response;
                 }
 
-                if (AnswerAll ?? false)
+                if (AnswersRequired == null)
                 {
                     if (Answers.All(item =>
                         answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
@@ -100,8 +109,8 @@ namespace SUTrivBot.Models
                         answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
                         response.AnswerStatus = AnswerStatus.PartiallyCorrect;
                 }
-                else if (Answers.Any(item =>
-                    answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
+                else if (Answers.Count(item =>
+                    answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)) >= AnswersRequired)
                     response.AnswerStatus = AnswerStatus.PartiallyCorrect;
 
 
