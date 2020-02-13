@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
@@ -17,13 +18,16 @@ namespace SUTrivBot.Models
         private readonly DiscordChannel _channel;
         private readonly DiscordGuild _guild;
         private readonly DiscordUser _triviaMaster;
+        private readonly DiscordClient _client;
         private readonly ILogger _logger;
         private readonly ConcurrentDictionary<DiscordUser, UserGameData> _players;
         private readonly List<Question> _askedQuestions;
+        
+        private DiscordDmChannel _triviaMasterDmChannel;
         private int _roundCount;
         
 
-        public GameState(GameId gameId, ILogger logger)
+        public GameState(GameId gameId, DiscordClient client, ILogger logger)
         {
             _channel = gameId.Channel;
             _guild = gameId.Guild;
@@ -32,11 +36,18 @@ namespace SUTrivBot.Models
             _players = new ConcurrentDictionary<DiscordUser, UserGameData>();
             _askedQuestions = new List<Question>();
             _roundCount = 0;
+            _client = client;
+            EstablishTriviaMasterDm().Wait();
         }
 
         public string GetGameName()
         {
             return $"Game in Channel {_channel.Name} in Guild {_guild.Name}";
+        }
+
+        public DiscordUser GetTriviaMaster()
+        {
+            return _triviaMaster;
         }
 
         public async Task AskQuestion(CommandContext ctx)
@@ -76,7 +87,8 @@ namespace SUTrivBot.Models
                         break;
                     case AnswerStatus.Error:
                         _logger.Error(result.Exception, $"Error parsing command for question: {question.QuestionText}");
-                        
+                        _triviaMasterDmChannel.SendMessageAsync(
+                            $"Error occured processing an answer! \nAnswer: {msg.Content}\nError Message: {result.Exception.Message}\n");
                         break;
                     case AnswerStatus.NormalCorrect:
                         if (_players.ContainsKey(msg.Author))
@@ -155,6 +167,13 @@ namespace SUTrivBot.Models
             }
 
             await ctx.RespondAsync(strBuilder.ToString());
+        }
+
+        private async Task EstablishTriviaMasterDm()
+        {
+            _triviaMasterDmChannel = await _client.CreateDmAsync(_triviaMaster);
+            await _triviaMasterDmChannel.SendMessageAsync(
+                $"You have been established as the Trivia Master for a Trivia {GetGameName()}");
         }
     }
 }
