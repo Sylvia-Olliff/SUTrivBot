@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
 using NLog;
 using SUTrivBot.Models;
 using SUTrivBot.Repo;
@@ -47,6 +48,11 @@ namespace SUTrivBot.Lib
             return _games.First(g => g.Key.ToString().Equals(name, StringComparison.InvariantCultureIgnoreCase)).Value;
         }
 
+        public static IGameState GetGameByTriviaMaster(DiscordUser user)
+        {
+            return _games.First(g => g.Key.User.Equals(user)).Value;
+        }
+
         public static List<IGameState> GetAllGames()
         {
             return _games.Values.ToList();
@@ -60,6 +66,12 @@ namespace SUTrivBot.Lib
                 await game.GetResults(ctx);
                 _games.TryRemove(gameId, out _);
             }
+        }
+
+        public static async Task GetGameStatus(CommandContext ctx, GameId gameId)
+        {
+            if (_games.ContainsKey(gameId))
+                await _games[gameId].GetStatus(ctx);
         }
 
         public static Question GetQuestion(List<int> excludedQuestions = null)

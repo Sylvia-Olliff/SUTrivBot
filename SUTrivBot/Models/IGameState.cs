@@ -11,5 +11,6 @@ namespace SUTrivBot.Models
         public DiscordUser GetTriviaMaster();
         public Task AskQuestion(CommandContext ctx);
         public Task GetResults(CommandContext ctx);
+        public Task GetStatus(CommandContext ctx);
     }
 }

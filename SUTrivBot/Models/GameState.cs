@@ -155,7 +155,30 @@ namespace SUTrivBot.Models
 
         public async Task GetResults(CommandContext ctx)
         {
-            var strBuilder = new StringBuilder("### *Game Results* ###\n");
+            var strBuilder = new StringBuilder("### _Game Results_ ###\n");
+            strBuilder.AppendLine($"Rounds played: {_roundCount}");
+            strBuilder.AppendLine();
+
+            UserGameData highestPlayer = new UserGameData(null);
+            
+            
+            foreach (var (user, gameData) in _players)
+            {
+                strBuilder.AppendLine($"{user.Username} results:");
+                if (gameData.Points > highestPlayer.Points)
+                    highestPlayer = gameData;
+                strBuilder.Append(gameData.GetGameData());
+                strBuilder.AppendLine();
+            }
+
+            strBuilder.AppendLine($"Player: {highestPlayer.User.Mention} Wins with {highestPlayer.Points} points!");
+            
+            await ctx.RespondAsync(strBuilder.ToString());
+        }
+
+        public async Task GetStatus(CommandContext ctx)
+        {
+            var strBuilder = new StringBuilder("### _Game Status_ ###\n");
             strBuilder.AppendLine($"Rounds played: {_roundCount}");
             strBuilder.AppendLine();
 
