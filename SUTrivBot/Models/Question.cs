@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
-using NLog;
-using SUTrivBot.Lib;
 
 namespace SUTrivBot.Models
 {
@@ -79,6 +76,8 @@ namespace SUTrivBot.Models
                 BonusPoints = BonusPoints
             };
 
+            bool AnswerContains(string item) => answer.Contains(item, StringComparison.InvariantCultureIgnoreCase);
+            
             try
             {
                 if (BonusPoints.HasValue && BonusPoints.Value != 0)
@@ -86,33 +85,21 @@ namespace SUTrivBot.Models
                     response.BonusPoints = BonusPoints;
                     if (BonusAll ?? false)
                     {
-                        if (BonusAnswers.All(item =>
-                            answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                            response.AnswerStatus = AnswerStatus.BonusCorrect;
-                        else if (BonusAnswers.Any(item =>
-                            answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                            response.AnswerStatus = AnswerStatus.PartiallyCorrect;
+                        if (BonusAnswers.All(AnswerContains)) response.AnswerStatus = AnswerStatus.BonusCorrect;
+                        else if (BonusAnswers.Any(AnswerContains)) response.AnswerStatus = AnswerStatus.PartiallyCorrect;
                     }
-                    else if (BonusAnswers.Any(item =>
-                        answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                        response.AnswerStatus = AnswerStatus.BonusCorrect;
+                    else if (BonusAnswers.Any(AnswerContains)) response.AnswerStatus = AnswerStatus.BonusCorrect;
 
                     return response;
                 }
 
-                if (AnswersRequired == null)
+                if (AnswersRequired.HasValue)
                 {
-                    if (Answers.All(item =>
-                        answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                        response.AnswerStatus = AnswerStatus.NormalCorrect;
-                    else if (Answers.Any(item =>
-                        answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                        response.AnswerStatus = AnswerStatus.PartiallyCorrect;
+                    if (Answers.All(AnswerContains)) response.AnswerStatus = AnswerStatus.NormalCorrect;
+                    else if (Answers.Any(AnswerContains)) response.AnswerStatus = AnswerStatus.PartiallyCorrect;
                 }
-                else if (Answers.Count(item =>
-                    answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)) >= AnswersRequired)
-                    response.AnswerStatus = AnswerStatus.PartiallyCorrect;
-
+                else if (Answers.Count(AnswerContains) >= AnswersRequired) response.AnswerStatus = AnswerStatus.NormalCorrect;
+                else if (Answers.Count(AnswerContains) > 0) response.AnswerStatus = AnswerStatus.PartiallyCorrect;
 
             }
             catch (Exception e) // Handling any errors is the responsibility of the consumer

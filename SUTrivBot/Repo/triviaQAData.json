@@ -12,7 +12,7 @@
     {
       "questionText": "Why do snakes make Steven cry?",
       "answerText": "They don't have any arms!",
-      "answers": ["no", "arms"],
+      "answers": ["arms"],
       "answersRequired": null,
       "bonusAnswers": [""],
       "bonusAll": false,
@@ -41,7 +41,7 @@
     },
     {
       "questionText": "Give the name of one of the Zoomans (not including Greg and Steven). Bonus for all of them",
-      "answerText": "Wy-Six, Jay-Ten, U-12, F-3",
+      "answerText": "Y-6, J-10, U-12, F-3",
       "answers": ["Y-6", "J-10", "U-12", "F-3"],
       "answersRequired": 1,
       "bonusAnswers": ["Y-6", "J-10", "U-12", "F-3"],
@@ -62,9 +62,9 @@
     {
       "questionText": "What is Steven's canonical birth month? Bonus: name the day too",
       "answerText": "2017-08-15T04:00:00.000Z",
-      "answers": ["August"],
+      "answers": ["August", "2017-08-15T04:00:00.000Z"],
       "answersRequired": 1,
-      "bonusAnswers": ["August", "15"],
+      "bonusAnswers": ["August", "15", "2017-08-15T04:00:00.000Z"],
       "bonusAll": true,
       "points": 1,
       "bonusPoints": 3
@@ -332,8 +332,12 @@
     {
       "questionText": "Finish the lyric: \"I bait my hook with self-pity, Someone tell me that I'm pretty...\"",
       "answerText": "Fishin for compliments",
-      "answers": ["Fishin for compliments"],
-      "answersRequired": null,
+      "answers": [
+        "Fishin for compliments",
+        "Fishin' for compliments",
+        "Fishing for compliments"
+      ],
+      "answersRequired": 1,
       "bonusAnswers": [""],
       "bonusAll": false,
       "points": 1,
@@ -930,16 +934,6 @@
       "bonusPoints": 0
     },
     {
-      "questionText": "Tell us a Bismuth pun. Can be from the show or original!",
-      "answerText": "don't know what to do with this one ¯\\_(ツ)_/¯ Maybe this will be a mod-only question",
-      "answers": ["¯\\_(ツ)_/¯"],
-      "answersRequired": null,
-      "bonusAnswers": [""],
-      "bonusAll": false,
-      "points": 1,
-      "bonusPoints": 0
-    },
-    {
       "questionText": "Where does Connie go in the movie?",
       "answerText": "Space Camp",
       "answers": ["Space Camp"],
@@ -951,9 +945,9 @@
     },
     {
       "questionText": "How much of Little Homeworld was complete at the start of the movie?",
-      "answerText": "0.837",
-      "answers": ["0.837"],
-      "answersRequired": null,
+      "answerText": "83.7%",
+      "answers": ["0.837", "83.7%", "83.7 percent"],
+      "answersRequired": 1,
       "bonusAnswers": [""],
       "bonusAll": false,
       "points": 1,
