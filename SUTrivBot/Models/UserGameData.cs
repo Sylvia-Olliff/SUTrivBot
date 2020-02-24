@@ -6,20 +6,25 @@ namespace SUTrivBot.Models
 {
     public class UserGameData
     {
-        public Dictionary<string, string> QuestionsAnswered { get; } 
+        public Dictionary<int, AnswerData> QuestionsAnswered { get; } 
         public DiscordUser User { get; }
         public int Points { get; private set; }
 
         public UserGameData(DiscordUser user)
         {
             User = user;
-            QuestionsAnswered = new Dictionary<string, string>();
+            QuestionsAnswered = new Dictionary<int, AnswerData>();
             Points = 0;
         }
 
-        public void AddAnswer(string questionText, string answerText, int points)
+        public void AddAnswer(Question question, string answerText, int points)
         {
-            QuestionsAnswered.Add(questionText, answerText);
+            QuestionsAnswered.Add(question.Id, new AnswerData
+            {
+                Question = question,
+                Answer = answerText,
+                PointsEarned = points
+            });
             Points += points;
         }
 
@@ -29,8 +34,10 @@ namespace SUTrivBot.Models
 
             foreach (var (key, value) in QuestionsAnswered)
             {
-                strBuilder.AppendLine($"\tQuestion: {key}");
-                strBuilder.AppendLine($"\tAnswer: {value}");
+                strBuilder.AppendLine($"\t# {key}");
+                strBuilder.AppendLine($"\tQuestion: {value.Question.QuestionText}");
+                strBuilder.AppendLine($"\tAnswer: {value.Answer}");
+                strBuilder.AppendLine($"\tEarning {value.PointsEarned}");
                 strBuilder.AppendLine();
             }
 

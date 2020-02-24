@@ -24,14 +24,16 @@ namespace SUTrivBot
 
             _commands = _discord.UseCommandsNext(config.CommandsNextConfiguration);
 
-            _commands.RegisterCommands<Commands>();
+            _commands.RegisterCommands<GameCommands>();
+            _commands.RegisterCommands<TriviaMasterCommands>();
+            _commands.RegisterCommands<FunCommands>();
 
             _interactivity = _discord.UseInteractivity(new InteractivityConfiguration());
         }
 
         public async Task StartAsync()
         {
-            await GameMaster.InitGameMaster(new TriviaStore(_config.Logger, _config.TriviaStoreSettings), _config.Logger);
+            await GameMaster.InitGameMaster(new TriviaStore(_config.Logger, _config.TriviaStoreSettings), _discord, _config.Logger);
             await _discord.ConnectAsync();
             await Task.Delay(-1);
         }
