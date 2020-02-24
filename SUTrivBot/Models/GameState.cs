@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using DSharpPlus;
@@ -61,7 +62,7 @@ namespace SUTrivBot.Models
             {
                 // If this user has already answered this question, do not accept any new answers.
                 if (_players.ContainsKey(msg.Author) &&
-                    _players[msg.Author].QuestionsAnswered.ContainsKey(question.QuestionText))
+                    _players[msg.Author].QuestionsAnswered.ContainsKey(question.Id))
                 {
                     msg.DeleteAsync();
                     return false;
@@ -75,12 +76,12 @@ namespace SUTrivBot.Models
                         if (_players.ContainsKey(msg.Author))
                         {
                             var player = _players[msg.Author];
-                            player.AddAnswer(question.QuestionText, msg.Content, (int)((double)question.Points / 2));
+                            player.AddAnswer(question, msg.Content, (int)((double)question.Points / 2));
                         }
                         else
                         {
                             var userData = new UserGameData(msg.Author);
-                            userData.AddAnswer(question.QuestionText, msg.Content, (int)((double)question.Points / 2));
+                            userData.AddAnswer(question, msg.Content, (int)((double)question.Points / 2));
                             _players.TryAdd(msg.Author, userData);
                         }
 
@@ -94,12 +95,12 @@ namespace SUTrivBot.Models
                         if (_players.ContainsKey(msg.Author))
                         {
                             var player = _players[msg.Author];
-                            player.AddAnswer(question.QuestionText, msg.Content, question.Points);
+                            player.AddAnswer(question, msg.Content, question.Points);
                         }
                         else
                         {
                             var userData = new UserGameData(msg.Author);
-                            userData.AddAnswer(question.QuestionText, msg.Content, question.Points);
+                            userData.AddAnswer(question, msg.Content, question.Points);
                             _players.TryAdd(msg.Author, userData);
                         }
 
@@ -109,12 +110,12 @@ namespace SUTrivBot.Models
                         if (_players.ContainsKey(msg.Author))
                         {
                             var player = _players[msg.Author];
-                            player.AddAnswer(question.QuestionText, msg.Content, question.BonusPoints.Value);
+                            player.AddAnswer(question, msg.Content, question.BonusPoints.Value);
                         }
                         else
                         {
                             var userData = new UserGameData(msg.Author);
-                            userData.AddAnswer(question.QuestionText, msg.Content, question.BonusPoints.Value);
+                            userData.AddAnswer(question, msg.Content, question.BonusPoints.Value);
                             _players.TryAdd(msg.Author, userData);
                         }
 
@@ -124,12 +125,12 @@ namespace SUTrivBot.Models
                         if (_players.ContainsKey(msg.Author))
                         {
                             var player = _players[msg.Author];
-                            player.AddAnswer(question.QuestionText, msg.Content, 0);
+                            player.AddAnswer(question, msg.Content, 0);
                         }
                         else
                         {
                             var userData = new UserGameData(msg.Author);
-                            userData.AddAnswer(question.QuestionText, msg.Content, 0);
+                            userData.AddAnswer(question, msg.Content, 0);
                             _players.TryAdd(msg.Author, userData);
                         }
                         break;
@@ -159,7 +160,7 @@ namespace SUTrivBot.Models
             strBuilder.AppendLine($"Rounds played: {_roundCount}");
             strBuilder.AppendLine();
 
-            UserGameData highestPlayer = new UserGameData(null);
+            var highestPlayer = new UserGameData(null);
             
             
             foreach (var (user, gameData) in _players)
@@ -189,6 +190,25 @@ namespace SUTrivBot.Models
                 strBuilder.AppendLine();
             }
 
+            await ctx.RespondAsync(strBuilder.ToString());
+        }
+
+        public async Task GetPoints(CommandContext ctx)
+        {
+            var strBuilder = new StringBuilder("Points by player\n");
+
+            var pointList = new List<Tuple<string, int>>();
+            foreach (var (user, gameData) in _players)
+            {
+                pointList.Add(new Tuple<string, int>(user.Username, gameData.Points));
+            }
+            pointList.Sort((x, y) => y.Item2.CompareTo(x.Item2));
+
+            foreach (var (username, points) in pointList)
+            {
+                strBuilder.AppendLine($"{username} with {points}");
+            }
+            
             await ctx.RespondAsync(strBuilder.ToString());
         }
 

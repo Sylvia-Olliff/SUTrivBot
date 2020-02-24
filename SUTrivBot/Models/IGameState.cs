@@ -12,5 +12,6 @@ namespace SUTrivBot.Models
         public Task AskQuestion(CommandContext ctx);
         public Task GetResults(CommandContext ctx);
         public Task GetStatus(CommandContext ctx);
+        public Task GetPoints(CommandContext ctx);
     }
 }
