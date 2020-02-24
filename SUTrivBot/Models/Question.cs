@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
-using NLog;
-using SUTrivBot.Lib;
 
 namespace SUTrivBot.Models
 {
@@ -16,6 +13,14 @@ namespace SUTrivBot.Models
         /// </summary>
         [JsonProperty("questionText", Required = Required.Always)]
         public string QuestionText { get; set; }
+        
+        /// <summary>
+        /// Text to be presented to the user as an answer for this Question.
+        /// This field contains human readable text
+        /// "Blue" for example
+        /// </summary>
+        [JsonProperty("answerText", Required = Required.Always)]
+        public string AnswerText { get; set; }
 
         /// <summary>
         /// Set of strings representing all acceptable answers
@@ -24,10 +29,11 @@ namespace SUTrivBot.Models
         public List<string> Answers { get; set; }
 
         /// <summary>
-        /// If true, then all strings in Answers must be present in the user's response
+        /// If null, then all strings in Answers must be present in the user's response
+        /// Otherwise, stores the count of required answers t 
         /// </summary>
-        [JsonProperty("answerAll", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? AnswerAll { get; set; }
+        [JsonProperty("answersRequired", NullValueHandling = NullValueHandling.Ignore)]
+        public int? AnswersRequired { get; set; }
 
         /// <summary>
         /// Set of strings representing all acceptable answers if the Question has a bonus portion
@@ -70,6 +76,8 @@ namespace SUTrivBot.Models
                 BonusPoints = BonusPoints
             };
 
+            bool AnswerContains(string item) => answer.Contains(item, StringComparison.InvariantCultureIgnoreCase);
+            
             try
             {
                 if (BonusPoints.HasValue && BonusPoints.Value != 0)
@@ -77,33 +85,21 @@ namespace SUTrivBot.Models
                     response.BonusPoints = BonusPoints;
                     if (BonusAll ?? false)
                     {
-                        if (BonusAnswers.All(item =>
-                            answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                            response.AnswerStatus = AnswerStatus.BonusCorrect;
-                        else if (BonusAnswers.Any(item =>
-                            answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                            response.AnswerStatus = AnswerStatus.PartiallyCorrect;
+                        if (BonusAnswers.All(AnswerContains)) response.AnswerStatus = AnswerStatus.BonusCorrect;
+                        else if (BonusAnswers.Any(AnswerContains)) response.AnswerStatus = AnswerStatus.PartiallyCorrect;
                     }
-                    else if (BonusAnswers.Any(item =>
-                        answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                        response.AnswerStatus = AnswerStatus.BonusCorrect;
+                    else if (BonusAnswers.Any(AnswerContains)) response.AnswerStatus = AnswerStatus.BonusCorrect;
 
                     return response;
                 }
 
-                if (AnswerAll ?? false)
+                if (AnswersRequired.HasValue)
                 {
-                    if (Answers.All(item =>
-                        answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                        response.AnswerStatus = AnswerStatus.NormalCorrect;
-                    else if (Answers.Any(item =>
-                        answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                        response.AnswerStatus = AnswerStatus.PartiallyCorrect;
+                    if (Answers.All(AnswerContains)) response.AnswerStatus = AnswerStatus.NormalCorrect;
+                    else if (Answers.Any(AnswerContains)) response.AnswerStatus = AnswerStatus.PartiallyCorrect;
                 }
-                else if (Answers.Any(item =>
-                    answer.Contains(item, StringComparison.InvariantCultureIgnoreCase)))
-                    response.AnswerStatus = AnswerStatus.PartiallyCorrect;
-
+                else if (Answers.Count(AnswerContains) >= AnswersRequired) response.AnswerStatus = AnswerStatus.NormalCorrect;
+                else if (Answers.Count(AnswerContains) > 0) response.AnswerStatus = AnswerStatus.PartiallyCorrect;
 
             }
             catch (Exception e) // Handling any errors is the responsibility of the consumer

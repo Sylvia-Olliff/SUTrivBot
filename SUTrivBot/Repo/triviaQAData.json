@@ -2,7 +2,7 @@
   "questionTemplate": {
     "questionText": "",
     "answers": [],
-    "answerAll": false,
+    "answersRequired": 1,
     "bonusAnswers": [],
     "bonusAll": false,
     "points": 0,
@@ -11,8 +11,9 @@
   "questions": [
     {
       "questionText": "Why do snakes make Steven cry?",
-      "answers": ["no", "arms"],
-      "answerAll": true,
+      "answerText": "They don't have any arms!",
+      "answers": ["arms"],
+      "answersRequired": null,
       "bonusAnswers": [""],
       "bonusAll": false,
       "points": 1,
@@ -20,8 +21,9 @@
     },
     {
       "questionText": "List the full names (if known) of all three Cool Kids",
+      "answerText": "Buck Dewey, Jenny Pizza, Sour Cream",
       "answers": ["Buck Dewey", "Jenny Pizza", "Sour Cream"],
-      "answerAll": true,
+      "answersRequired": null,
       "bonusAnswers": [""],
       "bonusAll": false,
       "points": 2,
@@ -29,8 +31,9 @@
     },
     {
       "questionText": "What is Peridot's Homeworld classification? (Facet or Cut - bonus name both)",
+      "answerText": "Facet-2F5L Cut-5XG",
       "answers": ["Facet-2F5L", "Cut-5XG"],
-      "answerAll": false,
+      "answersRequired": 1,
       "bonusAnswers": ["Facet-2F5L", "Cut-5XG"],
       "bonusAll": true,
       "points": 1,
@@ -38,8 +41,9 @@
     },
     {
       "questionText": "Give the name of one of the Zoomans (not including Greg and Steven). Bonus for all of them",
+      "answerText": "Y-6, J-10, U-12, F-3",
       "answers": ["Y-6", "J-10", "U-12", "F-3"],
-      "answerAll": false,
+      "answersRequired": 1,
       "bonusAnswers": ["Y-6", "J-10", "U-12", "F-3"],
       "bonusAll": true,
       "points": 2,
@@ -47,8 +51,9 @@
     },
     {
       "questionText": "What does Buck try to order at The Big Donut in Shirt Club?",
+      "answerText": "Caprese salad",
       "answers": ["Caprese", "salad"],
-      "answerAll": true,
+      "answersRequired": null,
       "bonusAnswers": [""],
       "bonusAll": false,
       "points": 2,
@@ -56,12 +61,937 @@
     },
     {
       "questionText": "What is Steven's canonical birth month? Bonus: name the day too",
-      "answers": ["August"],
-      "answerAll": false,
-      "bonusAnswers": ["August", "15"],
+      "answerText": "2017-08-15T04:00:00.000Z",
+      "answers": ["August", "2017-08-15T04:00:00.000Z"],
+      "answersRequired": 1,
+      "bonusAnswers": ["August", "15", "2017-08-15T04:00:00.000Z"],
       "bonusAll": true,
       "points": 1,
       "bonusPoints": 3
+    },
+    {
+      "questionText": "What is the name of the large body of water where Russia is in our universe?",
+      "answerText": "Tunguska Sea",
+      "answers": ["Tunguska"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Describe (or draw) Bismuth's tattoo",
+      "answerText": "Star over a triangle",
+      "answers": ["Star", "triangle"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Who voices Vidalia? Bonus: What is her role on the Crewniverse?",
+      "answerText": "Jackie Buscarino, producer",
+      "answers": ["Jackie Buscarino"],
+      "answersRequired": null,
+      "bonusAnswers": ["producer"],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 1
+    },
+    {
+      "questionText": "\"Here Comes a Thought\" is based on what therapeutic technique?",
+      "answerText": "Mindfullness Meditation",
+      "answers": ["Mindfullness", "Meditation"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What color is Kevin's car?",
+      "answerText": "Yellow",
+      "answers": ["Yellow"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is Vidalia's nickname for Marty?",
+      "answerText": "Farty Marty",
+      "answers": ["Farty Marty"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Correctly spell the name of the Off Color Gem's Sapphire",
+      "answerText": "Padparadscha",
+      "answers": ["Padparadscha"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "The magical trinket from the pilot was reworked into which episode?",
+      "answerText": "Steven and the Stevens",
+      "answers": ["Steven and the Stevens"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "How many years ago did Ruby and Sapphire first meet?",
+      "answerText": "5750",
+      "answers": ["5750"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Name one of the gifts the Gems bring to baby Steven, bonus: name all 3",
+      "answerText": "Razor, dictionary, (adult) diapers",
+      "answers": ["Razor", "dictionary", "diapers"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What animal is Amethyst laying on in the pilot's opening sequence?",
+      "answerText": "Tiger (lion also okay)",
+      "answers": ["Tiger", "lion"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the job of Lapis Lazulis on Homeworld?",
+      "answerText": "Terraforming",
+      "answers": ["Terraforming"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What does Peridot call a screwdriver in Too Far?",
+      "answerText": "Leverage Optimizer",
+      "answers": ["Leverage Optimizer"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is Lars's last name?",
+      "answerText": "Barriga",
+      "answers": ["Barriga"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What are the names Steven gave to the five Homeworld Rubies?",
+      "answerText": "Army, Leggy, Navy, Eyeball, Doc",
+      "answers": ["Army", "Leggy", "Navy", "Eyeball", "Doc"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Name one of the angry lunch enemies in the short Steven Reacts",
+      "answerText": "Pizza, Burger, Sandwich",
+      "answers": ["Pizza", "Burger", "Sandwich"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Complete the lyric: \"I can't help it if I make a scene, I'm stepping out of my\"",
+      "answerText": "Hot pink limousine",
+      "answers": ["Hot pink limousine"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What manga did Steven have in his bedside stand during House Guest?",
+      "answerText": "Sailor Moon",
+      "answers": ["Sailor Moon"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What kind of animal steals Steven's bindle food in On the Run?",
+      "answerText": "Raccoon",
+      "answers": ["Raccoon"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the Steven Universe equivalent of YouTube?",
+      "answerText": "TubeTube",
+      "answers": ["TubeTube"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Which two mammals did Steven feature in a slideshow in The New Lars?",
+      "answerText": "Sloth and koala",
+      "answers": ["Sloth and koala"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What are the names of the Beetles in Giant Woman?",
+      "answerText": "Heaven and Earth",
+      "answers": ["Heaven", "Earth"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What state is Beach City located in?",
+      "answerText": "Delmarva",
+      "answers": ["Delmarva"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Where is the SU-verse's film industry located?",
+      "answerText": "Kansas",
+      "answers": ["Kansas"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What did Ronaldo call his and Lars's group in the Horror Club flashback?",
+      "answerText": "Beach City Explorer Club",
+      "answers": ["Beach City Explorer Club"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What did Pearl mistakenly call Ronaldo in Rising Tides/Crashing Skies?",
+      "answerText": "Frybo",
+      "answers": ["Frybo"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Finish the lyric: \"I bait my hook with self-pity, Someone tell me that I'm pretty...\"",
+      "answerText": "Fishin for compliments",
+      "answers": [
+        "Fishin for compliments",
+        "Fishin' for compliments",
+        "Fishing for compliments"
+      ],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the series to which the book Unfamiliar Familiar belongs?",
+      "answerText": "The Spirit Morph Saga",
+      "answers": ["Spirit Morph Saga"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "According to Buck, what did Lars say that was \"transcendent?\"",
+      "answerText": "Bingo Bongo",
+      "answers": ["Bingo Bongo"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "How many elbows does Smoky Quartz have?",
+      "answerText": "Three",
+      "answers": ["Three", 3],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Where does Steven get all his shirts from?",
+      "answerText": "His dad's merchandise",
+      "answers": ["dad", "merchandise"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Name two of the four new characters from Garnet's Universe. Bonus: name all of them",
+      "answerText": "Hoppy, Hopper, Ringo, Foxman",
+      "answers": ["Hoppy", "Hopper", "Ringo", "Foxman"],
+      "answersRequired": 2,
+      "bonusAnswers": ["Hoppy", "Hopper", "Ringo", "Foxman"],
+      "bonusAll": true,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What episode does the term \"Steven Bomb\" come from?",
+      "answerText": "Garnet's Universe",
+      "answers": ["Garnet", "Universe"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the symbol on the American dollar in the show?",
+      "answerText": "Broken snake/join or die symbol",
+      "answers": ["snake", "join", "die"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Finish the line: \"My mind is the internet, I know...\"",
+      "answerText": "\"every continuity mistake made on television\"",
+      "answers": ["every continuity mistake made on television"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Three of the \"Famethyst\" tell us their cuts-- Name one.",
+      "answerText": "8XJ, 8XG, 8XL",
+      "answers": ["8XJ", "8XG", "8XL"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Name an Emmy-nominated SU episode. Bonus: name all 3",
+      "answerText": "Lion 3: Straight to Video, The Answer, Mr. Greg",
+      "answers": ["Lion 3", "Straight to Video", "The Answer", "Mr. Greg"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the 100th episode of Steven Universe?",
+      "answerText": "Bismuth",
+      "answers": ["Bismuth"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the first episode of Steven Universe?",
+      "answerText": "Gem Glow",
+      "answers": ["Gem Glow"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What was Connie's fake name in Doug Out?",
+      "answerText": "Veronica Cucamonga",
+      "answers": ["Veronica", "Cucamonga"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What epithet does Mayor Dewey use for Lars in Dewey Wins?",
+      "answerText": "Donut Boy",
+      "answers": ["Donut Boy"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What first name does Nanefua attribute to Mayor Dewey?",
+      "answerText": "Billiam",
+      "answers": ["Billiam"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "According to Dewey in Dewey Wins, how many people are \"half the town\"?",
+      "answerText": "12",
+      "answers": ["12"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Amethyst, Steven, and Pearl are going to what show in Last One Out of Beach City",
+      "answerText": "Mike Krohl",
+      "answers": ["Mike", "Krohl"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the name of Greg's business?",
+      "answerText": "It's a Wash",
+      "answers": ["It's a Wash", "Its a Wash"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What boxset does Ronaldo lend to Steven?",
+      "answerText": "Koala Princess",
+      "answers": ["Koala Princess"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the name of the property they travel to in Gemcation?",
+      "answerText": "Cool Ranch",
+      "answers": ["Cool Ranch"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What does the shorty squad try to plant in Back to the Kindergarten?",
+      "answerText": "Sunflowers",
+      "answers": ["Sunflowers"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the group nickname of Amethyst, Peridot, & Steven?",
+      "answerText": "Shorty Squad",
+      "answers": ["Shorty Squad"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What horror film do they watch in Sadie Killer? bonus: what country is it from?",
+      "answerText": "The Lurch / Bulgaria",
+      "answers": ["The Lurch"],
+      "answersRequired": null,
+      "bonusAnswers": ["Bulgaria"],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Finish the lyric: \"Oh, we are the working dead. And we lurch for __________\"",
+      "answerText": "minimum wage",
+      "answers": ["minimum wage"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What does Kevin think Steven's name is in Kevin Party",
+      "answerText": "Clarence",
+      "answers": ["Clarence"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is Kevin's ex's name?",
+      "answerText": "Sabina",
+      "answers": ["Sabina"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is Steven's teddy bear's name?",
+      "answerText": "MC Bear Bear",
+      "answers": ["MC", "Bear", "Bear"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "3 ships are named in Lars of the Stars. Name one. Bonus: name all 3",
+      "answerText": "Sun Incinerator, Star Skipper, Destiny Destroyer",
+      "answers": ["Sun Incinerator", "Star Skipper", "Destiny Destroyer"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Who is Lars & the Off Colors space rival?",
+      "answerText": "Emerald",
+      "answers": ["Emerald"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "The voice actor of Emerald is Jinx Monsoon. What show did she become famous on?",
+      "answerText": "Ru Paul's Drag Race",
+      "answers": ["Ru Paul", "rupaul"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Stevonnie is not one person & not two people. What are they?",
+      "answerText": "An experience!",
+      "answers": ["experience"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Finish Fluorite's line from Your Mother and Mine: \"Don't be silly, Rose Quartz isn't __\"",
+      "answerText": "real",
+      "answers": ["real"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What Disney movie is the song \"Your Mother and Mine\" from?",
+      "answerText": "Peter Pan",
+      "answers": ["Peter Pan"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Who is Greg's old friend from the music industry, whom Sadie mistakes for her mom?",
+      "answerText": "Sunshine Justice",
+      "answers": ["Sunshine Justice"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What does Garnet name her cat?",
+      "answerText": "Cat Steven",
+      "answers": ["Cat Steven"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What does Amethyst shapeshift into during the improv show?",
+      "answerText": "Plunger",
+      "answers": ["Plunger"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What emoji does Pearl text to Steven in A Single Pale Rose",
+      "answerText": "monkey, flower (hibiscus/mallow)",
+      "answers": ["monkey", "flower", "hibiscus", "mallow)"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What did Greg change his last name from?",
+      "answerText": "DeMayo",
+      "answers": ["DeMayo"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What comic inspired Ruby to become a cowboy?",
+      "answerText": "Lonesome Lasso",
+      "answers": ["Lonesome Lasso"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the name of the new Gem village on Earth?",
+      "answerText": "Little Homeworld",
+      "answers": ["Little Homeworld"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What corrupted Gem attacks Bismuth in Made of Honor?",
+      "answerText": "Biggs",
+      "answers": ["Biggs"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "\"Let's think about cake, let's thing about flowers, let's think about dressing up and _______\"",
+      "answerText": "dancing around for hours",
+      "answers": ["dancing around for hours"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What were the three flaws White Diamond listed for Garnet, Amethyst, and Pearl?",
+      "answerText": "insecure, dependent, obsessed.",
+      "answers": ["insecure", "dependent", "obsessed"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Why does Bismuth wear armor to Ruby and Sapphire's wedding?",
+      "answerText": "It's the nicest thing she owns",
+      "answers": ["nicest thing"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Why doesn't Blue Diamond's pathokinesis make Lapis fall to her knees?",
+      "answerText": "She's felt worse.",
+      "answers": ["felt worse"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Neprite's full name is:",
+      "answerText": "Facet-413 Cabochon-12",
+      "answers": ["Facet-413", "Cabochon-12"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Nephrite's superior office in the war was ",
+      "answerText": "Hessonite",
+      "answers": ["Hessonite"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is White Diamond's nickname for Pink Diamond?",
+      "answerText": "Starlight",
+      "answers": ["Starlight"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "How do the Pebbles recognize Steven (as Pink Diamond)",
+      "answerText": "He says \"thank you\"",
+      "answers": ["thank"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What silly name does Yellow Pearl call Steven?",
+      "answerText": "Pink lasagna",
+      "answers": ["Pink lasagna"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What does Yellow Diamond excuse herself to go tend to after her sauna meeting with Steven.",
+      "answerText": "Citrine production reports",
+      "answers": ["Citrine production reports"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "In Steven's dream in Together Alone, name something he's juggling.",
+      "answerText": "MC Bear Bear, Chaaaps, ukulele",
+      "answers": ["MC Bear Bear", "Chaaaps", "ukulele"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Non-Crystal gems fuse in Together Alone. What gems are they/what is the fusion's name?",
+      "answerText": "(Lemon) Jade",
+      "answers": ["Jade", "lemon"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What food did Connie luckily grab before Stevonnie was locked up after the ball?",
+      "answerText": "Protes (protein bar)",
+      "answers": ["Protes", "protein bar"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What's one of the things that helps Steven psychic-project to Earth in Escapsim? ",
+      "answerText": "Beach City, video games, donuts, Dad",
+      "answers": ["Beach City", "video games", "donuts", "Dad"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What two things finishes off Steven's boat in Escapsim?",
+      "answerText": "giant spear, cape",
+      "answers": ["spear", "cape"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "How does Steven defeat the watermelon shark?",
+      "answerText": "by smooching it!",
+      "answers": ["smooching", "kissing"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What does Steven write to Bismuth and Greg in Escapsim?",
+      "answerText": "HELP! WE NEED BACKUP!",
+      "answers": ["HELP", "NEED", "BACKUP"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Where did Pink Diamond get the organic worms from?",
+      "answerText": "Kyanite Colony",
+      "answers": ["Kyanite Colony"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Where does Connie go in the movie?",
+      "answerText": "Space Camp",
+      "answers": ["Space Camp"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "How much of Little Homeworld was complete at the start of the movie?",
+      "answerText": "83.7%",
+      "answers": ["0.837", "83.7%", "83.7 percent"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "Finish the line from Spinel: \"Well, well, well, lemme get a look at the _________\"",
+      "answerText": "menagerie",
+      "answers": ["menagerie"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is the name of Pearl's song in the movie?",
+      "answerText": "system/BOOT.pearl_final(3).info",
+      "answers": ["system/BOOT.pearl_final(3).info"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "How many rubies are usually in their groups?",
+      "answerText": "Three, or more.",
+      "answers": ["Three or more", "3 or more"],
+      "answersRequired": 1,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
+    },
+    {
+      "questionText": "What is Bismuth horrified that Spinel is destroying with the buzz saw?",
+      "answerText": "her scaffolding!",
+      "answers": ["scaffolding"],
+      "answersRequired": null,
+      "bonusAnswers": [""],
+      "bonusAll": false,
+      "points": 1,
+      "bonusPoints": 0
     }
   ]
 }
