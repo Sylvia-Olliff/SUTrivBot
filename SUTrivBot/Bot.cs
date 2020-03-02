@@ -27,6 +27,7 @@ namespace SUTrivBot
             _commands.RegisterCommands<GameCommands>();
             _commands.RegisterCommands<TriviaMasterCommands>();
             _commands.RegisterCommands<FunCommands>();
+            _commands.RegisterCommands<AdminCommands>();
 
             _interactivity = _discord.UseInteractivity(new InteractivityConfiguration());
         }

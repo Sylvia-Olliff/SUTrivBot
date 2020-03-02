@@ -63,7 +63,7 @@ namespace SUTrivBot.Lib
         [Command("play")]
         public async Task Play(CommandContext ctx)
         {            
-                if (GameMaster.NewGame(new GameId(ctx.Guild, ctx.Channel, ctx.User)))
+                if (await GameMaster.NewGame(new GameId(ctx.Guild, ctx.Channel, ctx.User)))
                     await ctx.RespondAsync("New game created");
                 else
                     await ctx.RespondAsync("Failed to create new game");

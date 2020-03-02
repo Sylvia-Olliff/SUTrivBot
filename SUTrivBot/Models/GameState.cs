@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using DSharpPlus;
@@ -23,12 +22,13 @@ namespace SUTrivBot.Models
         private readonly ILogger _logger;
         private readonly ConcurrentDictionary<DiscordUser, UserGameData> _players;
         private readonly List<Question> _askedQuestions;
+        private readonly GuildSettings _guildSettings;
         
         private DiscordDmChannel _triviaMasterDmChannel;
         private int _roundCount;
         
 
-        public GameState(GameId gameId, DiscordClient client, ILogger logger)
+        public GameState(GameId gameId, DiscordClient client, GuildSettings guildSettings, ILogger logger)
         {
             _channel = gameId.Channel;
             _guild = gameId.Guild;
@@ -38,6 +38,8 @@ namespace SUTrivBot.Models
             _askedQuestions = new List<Question>();
             _roundCount = 0;
             _client = client;
+            _guildSettings = guildSettings;
+            
             EstablishTriviaMasterDm().Wait();
         }
 

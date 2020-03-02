@@ -25,16 +25,30 @@ namespace SUTrivBot.Lib
             _logger = logger;
             _games = new ConcurrentDictionary<GameId, IGameState>();
             _client = client;
-
+            
             await _triviaStore.LoadQuestions();
         }
 
-        public static bool NewGame(GameId gameId)
+        public static async Task<bool> NewGame(GameId gameId)
         {
             if (_games.ContainsKey(gameId))
                 return false;
+
+            await using var db = new SettingsContext();
+            var guildSettings = db.Guilds.FindAsync("GuildId", gameId.Guild.Name).Result;
+
+            if (guildSettings == null)
+            {
+                guildSettings = new GuildSettings
+                {
+                    GuildId = gameId.Guild.Name,
+                    Disabled = false,
+                    RestrictTrivMaster = true
+                };
+                await db.Guilds.AddAsync(guildSettings);
+            }
             
-            _games.TryAdd(gameId, new GameState(gameId, _client, _logger));
+            _games.TryAdd(gameId, new GameState(gameId, _client, guildSettings, _logger));
             return true;
         }
 
