@@ -31,25 +31,49 @@ namespace SUTrivBot.Lib
 
         public static async Task<bool> NewGame(GameId gameId)
         {
-            if (_games.ContainsKey(gameId))
-                return false;
-
-            await using var db = new SettingsContext();
-            var guildSettings = db.Guilds.FindAsync("GuildId", gameId.Guild.Name).Result;
-
-            if (guildSettings == null)
+            try
             {
-                guildSettings = new GuildSettings
+                //TODO: Create central DB handler for guild settings so that it uses the same context. 
+                if (_games.ContainsKey(gameId))
+                    return false;
+
+                await using var db = new SettingsContext();
+                
+                var guildSettings = db.Guilds.FindAsync(gameId.Guild.Name).Result;
+
+                if (guildSettings == null)
                 {
-                    GuildId = gameId.Guild.Name,
-                    Disabled = false,
-                    RestrictTrivMaster = true
-                };
-                await db.Guilds.AddAsync(guildSettings);
+                    guildSettings = new GuildSettings
+                    {
+                        GuildId = gameId.Guild.Name,
+                        Disabled = false,
+                        RestrictTrivMaster = true
+                    };
+                    await db.Guilds.AddAsync(guildSettings);
+                    await db.SaveChangesAsync();
+                }
+
+                if (guildSettings.Disabled)
+                    return false;
+                if (guildSettings.LockedChannels.Contains(new Channel
+                {
+                    ChannelName = gameId.Channel.Name,
+                    GuildId = gameId.Guild.Name
+                }))
+                    return false;
+
+                var member = (DiscordMember) gameId.User;
+                
+                _logger.Info($"Discord User to Discord Member cast. Roles: {member.Roles.ToList().Count}");
+                
+                _games.TryAdd(gameId, new GameState(gameId, _client, guildSettings, _logger));
+                return true;
             }
-            
-            _games.TryAdd(gameId, new GameState(gameId, _client, guildSettings, _logger));
-            return true;
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Error creating new game!");
+                return false;
+            }
         }
 
         public static IGameState GetGameById(GameId gameId)

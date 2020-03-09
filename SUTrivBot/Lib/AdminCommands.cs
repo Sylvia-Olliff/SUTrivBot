@@ -32,7 +32,9 @@ namespace SUTrivBot.Lib
             var settings = await GetGuildSettings(ctx.Guild);
             settings.LockedChannels.Add(new Channel
             {
-                ChannelName = channel.Name
+                ChannelName = channel.Name,
+                GuildId = ctx.Guild.Name,
+                GuildSet = settings
             });
             await _context.SaveChangesAsync();
             await ctx.RespondAsync($"Channel: {channel.Name} locked!");
@@ -72,7 +74,10 @@ namespace SUTrivBot.Lib
             var strBuilder = new StringBuilder("### SETTINGS ###\n");
             strBuilder.AppendLine($"PeriBot Enabled: {(settings.Disabled ? "No" : "Yes")}");
             strBuilder.AppendLine($"Restrict Trivia Master: {(settings.RestrictTrivMaster ? "Yes" : "No")}");
-
+            foreach (var item in settings.LockedChannels)
+            {
+                strBuilder.AppendLine($"Locked Channel: {item.ChannelName}");
+            }
             await ctx.RespondAsync(strBuilder.ToString());
         }
 
