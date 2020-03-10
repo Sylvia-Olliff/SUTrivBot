@@ -5,16 +5,14 @@ namespace SUTrivBot.Models
 {
     public class GuildSettings
     {
-        [Key]
-        public string GuildId { get; set; }
+        public ulong GuildId { get; set; }
         
-        [Required]
+        public string GuildName { get; set; }
+        
         public bool Disabled { get; set; }
         
-        [Required]
         public bool RestrictTrivMaster { get; set; }
         
-        [Required]
         public List<Channel> LockedChannels { get; } = new List<Channel>();
     }
 }

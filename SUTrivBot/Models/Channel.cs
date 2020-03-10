@@ -1,13 +1,10 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
-
 namespace SUTrivBot.Models
 {
     public class Channel
     {
-        [Key]
-        public int ChannelId { get; set; }
-        public string GuildId { get; set; }
+        public ulong ChannelId { get; set; }
+        public ulong GuildId { get; set; }
         
         public GuildSettings GuildSet { get; set; }
         
@@ -23,7 +20,7 @@ namespace SUTrivBot.Models
 
             var otherChannel = (Channel) obj;
 
-            return otherChannel.ChannelName == ChannelName && otherChannel.GuildId == GuildId;
+            return otherChannel.ChannelId == ChannelId && otherChannel.GuildId == GuildId;
         }
     }
 }

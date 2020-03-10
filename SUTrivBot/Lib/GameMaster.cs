@@ -37,28 +37,14 @@ namespace SUTrivBot.Lib
                 if (_games.ContainsKey(gameId))
                     return false;
 
-                await using var db = new SettingsContext();
-                
-                var guildSettings = db.Guilds.FindAsync(gameId.Guild.Name).Result;
-
-                if (guildSettings == null)
-                {
-                    guildSettings = new GuildSettings
-                    {
-                        GuildId = gameId.Guild.Name,
-                        Disabled = false,
-                        RestrictTrivMaster = true
-                    };
-                    await db.Guilds.AddAsync(guildSettings);
-                    await db.SaveChangesAsync();
-                }
+                var guildSettings = await SettingsHandler.GetGuildSettings(gameId.Guild.Id);
 
                 if (guildSettings.Disabled)
                     return false;
                 if (guildSettings.LockedChannels.Contains(new Channel
                 {
-                    ChannelName = gameId.Channel.Name,
-                    GuildId = gameId.Guild.Name
+                    ChannelId = gameId.Channel.Id,
+                    GuildId = gameId.Guild.Id
                 }))
                     return false;
 
