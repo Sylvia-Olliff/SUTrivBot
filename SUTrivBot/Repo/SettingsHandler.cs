@@ -14,6 +14,7 @@ namespace SUTrivBot.Repo
         private static readonly SqliteConnectionStringBuilder ConnectionStringBuilder = new SqliteConnectionStringBuilder();
         private static readonly Dictionary<ulong, GuildSettings> Cache = new Dictionary<ulong, GuildSettings>();
         private static readonly ILogger Logger;
+        private static readonly bool DropTables;
         
         private const string TableNameGuild = "GuildSettings";
         private const string TableNameChannel = "Channels";
@@ -21,7 +22,9 @@ namespace SUTrivBot.Repo
         static SettingsHandler()
         {
             ConnectionStringBuilder.DataSource = "peribot.db";
-            Logger = ConfigBuilder.Build().Logger;
+            var config = ConfigBuilder.Build();
+            Logger = config.Logger;
+            DropTables = config.SqlSettings.DropTables;
             Init().Wait();
         }
 
@@ -31,8 +34,16 @@ namespace SUTrivBot.Repo
             {
                 await using var connection = new SqliteConnection(ConnectionStringBuilder.ConnectionString);
                 await connection.OpenAsync();
-                
-                // TODO: add an appsettings configuration to trigger table drop. 
+
+                if (DropTables)
+                {
+                    var dropTablesCommand = connection.CreateCommand();
+                    dropTablesCommand.CommandText =
+                        $"DROP TABLE IF EXISTS {TableNameChannel}; DROP TABLE IF EXISTS {TableNameGuild};";
+                    var result = await dropTablesCommand.ExecuteNonQueryAsync();
+                    if (result != 0)
+                        throw new Exception($"Error Dropping Tables! Code: {result}");
+                }
 
                 var checkGuildTableExists = connection.CreateCommand();
                 checkGuildTableExists.CommandText = $"SELECT name FROM sqlite_master WHERE type='table' AND name='{TableNameGuild}'";
@@ -127,7 +138,7 @@ namespace SUTrivBot.Repo
             }
         }
 
-        public static async Task<GuildSettings> GetGuildSettings(ulong guildId)
+        public static async Task<GuildSettings> GetGuildSettings(ulong guildId, string guildName)
         {
             if (Cache.ContainsKey(guildId))
                 return Cache[guildId];
@@ -144,9 +155,10 @@ namespace SUTrivBot.Repo
                     $"SELECT Disabled, RestrictTriviaMaster, GuildID, GuildName FROM {TableNameGuild} WHERE GuildID = {guildId}";
 
                 await using var guildQueryReader = await getGuildQuery.ExecuteReaderAsync();
-                
+
                 try
                 {
+                    await guildQueryReader.ReadAsync();
                     settings = new GuildSettings
                     {
                         Disabled = guildQueryReader.GetBoolean(0),
@@ -178,7 +190,7 @@ namespace SUTrivBot.Repo
                     await connection.CloseAsync();
                     return settings;
                 }
-                catch (InvalidOperationException ex) {}
+                catch (InvalidOperationException) { }
                 catch (Exception e)
                 {
                     Logger.Error(e, $"Failed while attempting to retrieve Locked Channels for {settings?.GuildName}");
@@ -189,10 +201,11 @@ namespace SUTrivBot.Repo
                 {
                     GuildId = guildId,
                     Disabled = false,
-                    RestrictTrivMaster = true
+                    RestrictTrivMaster = true,
+                    GuildName = guildName
                 }))
                 {
-                    return await GetGuildSettings(guildId);
+                    return await GetGuildSettings(guildId, guildName);
                 }
                 
             }
@@ -227,7 +240,11 @@ namespace SUTrivBot.Repo
                 var updateCommand = connection.CreateCommand();
                 updateCommand.CommandText = updateGuildStr;
                 await updateCommand.ExecuteNonQueryAsync();
-                await UpdateChannels(settings, connection);
+                if (!await UpdateChannels(settings, connection))
+                {
+                    await connection.CloseAsync();
+                    return false;
+                }
                 await connection.CloseAsync();
 
                 return true;

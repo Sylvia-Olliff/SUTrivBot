@@ -26,18 +26,21 @@ namespace SUTrivBot.Lib
             var triviaSection = config.GetSection("TriviaStoreSettings");
             var commandsSection = config.GetSection("CommandsSettings");
             var botSection = config.GetSection("BotSettings");
+            var sqlSection = config.GetSection("SQLSettings");
             botSection["Token"] = config["BOT_TOKEN"];
 
-            _currentConfig = new Config(GetLogger(), 
-                new DiscordConfiguration
+            _currentConfig = new Config
+            {
+                Logger = GetLogger(),
+                DiscordConfiguration = new DiscordConfiguration
                 {
                     Token = botSection["Token"],
                     TokenType = TokenType.Bot,
                     UseInternalLogHandler = bool.Parse(botSection["UseInternalLogHandler"]),
                     LogLevel = Enum.Parse<DSharpPlus.LogLevel>(botSection["LogLevel"]),
                     AutoReconnect = bool.Parse(botSection["AutoReconnect"])
-                }, 
-                new CommandsNextConfiguration
+                },
+                CommandsNextConfiguration = new CommandsNextConfiguration
                 {
                     StringPrefix = commandsSection["StringPrefix"],
                     CaseSensitive = bool.Parse(commandsSection["CaseSensitive"]),
@@ -45,11 +48,16 @@ namespace SUTrivBot.Lib
                     EnableDms = bool.Parse(commandsSection["EnableDms"]),
                     EnableMentionPrefix = bool.Parse(commandsSection["EnableMentionPrefix"]),
                     IgnoreExtraArguments = bool.Parse(commandsSection["IgnoreExtraArguments"])
-                }, 
-                new TriviaStoreSettings
+                },
+                TriviaStoreSettings = new TriviaStoreSettings
                 {
                     PathToFile = triviaSection["PathToFile"]
-                });
+                },
+                SqlSettings = new SQLSettings
+                {
+                    DropTables = bool.Parse(sqlSection["DropTables"])
+                }
+            };
             
             return _currentConfig;
         }

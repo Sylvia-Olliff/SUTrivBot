@@ -11,17 +11,11 @@ namespace SUTrivBot.Models
 {
     public class Config
     {
-        public ILogger Logger { get; }
-        public DiscordConfiguration DiscordConfiguration { get; }
-        public CommandsNextConfiguration CommandsNextConfiguration { get; }
-        public TriviaStoreSettings TriviaStoreSettings { get; }
-
-        public Config(ILogger logger, DiscordConfiguration discordConfiguration, CommandsNextConfiguration commandsNextConfiguration, TriviaStoreSettings triviaStoreSettings)
-        {
-            Logger = logger;
-            DiscordConfiguration = discordConfiguration;
-            CommandsNextConfiguration = commandsNextConfiguration;
-            TriviaStoreSettings = triviaStoreSettings;
-        }
+        public ILogger Logger { get; set; }
+        public DiscordConfiguration DiscordConfiguration { get; set; }
+        public CommandsNextConfiguration CommandsNextConfiguration { get; set; }
+        public TriviaStoreSettings TriviaStoreSettings { get; set; }
+        
+        public SQLSettings SqlSettings { get; set; }
     }
 }

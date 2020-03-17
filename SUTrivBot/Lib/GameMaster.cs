@@ -37,7 +37,7 @@ namespace SUTrivBot.Lib
                 if (_games.ContainsKey(gameId))
                     return false;
 
-                var guildSettings = await SettingsHandler.GetGuildSettings(gameId.Guild.Id);
+                var guildSettings = await SettingsHandler.GetGuildSettings(gameId.Guild.Id, gameId.Guild.Name);
 
                 if (guildSettings.Disabled)
                     return false;
